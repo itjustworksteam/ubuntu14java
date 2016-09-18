@@ -1,0 +1,17 @@
+language: python
+
+python:
+  - 2.7
+
+build:
+  pre_ci:
+    - docker pull therickys93/ubuntu14
+    - docker build --rm -t therickys93/ubuntu14java .
+
+  pre_ci_boot:
+    image_name: therickys93/ubuntu14java
+    image_tag: latest
+    pull: false
+
+  ci:
+    - bash /java/test/test.sh
